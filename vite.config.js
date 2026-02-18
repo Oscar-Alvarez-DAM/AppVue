@@ -4,6 +4,7 @@ import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 
  export default defineConfig({
+     base: '/',  // Rutas relativas para assets
      plugins: [
          laravel({
              input: [
