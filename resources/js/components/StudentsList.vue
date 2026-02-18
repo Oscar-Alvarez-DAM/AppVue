@@ -111,7 +111,7 @@ const editingStudent = ref(null)
 
 const fetchStudents = async () => {
   try {
-    const response = await axios.get('/api/students')
+    const response = await axios.get('students')
     students.value = response.data
   } catch (error) {
     console.error('Error fetching students:', error)
@@ -121,7 +121,7 @@ const fetchStudents = async () => {
 
 const fetchCourses = async () => {
   try {
-    const response = await axios.get('/api/courses')
+    const response = await axios.get('courses')
     courses.value = response.data
   } catch (error) {
     console.error('Error fetching courses:', error)
@@ -131,14 +131,14 @@ const fetchCourses = async () => {
 const saveStudent = async () => {
   try {
     if (editingStudent.value) {
-      await axios.put(`/api/students/${editingStudent.value.id}`, {
+      await axios.put(`students/${editingStudent.value.id}`, {
         name: form.value.name,
         email: form.value.email,
         course_id: parseInt(form.value.course_id)
       })
       alert('Estudiante actualizado correctamente')
     } else {
-      await axios.post('/api/students', {
+      await axios.post('students', {
         name: form.value.name,
         email: form.value.email,
         course_id: parseInt(form.value.course_id)
@@ -174,7 +174,7 @@ const resetForm = () => {
 const deleteStudent = async (studentId) => {
   if (confirm('¿Deseas eliminar este estudiante?')) {
     try {
-      await axios.delete(`/api/students/${studentId}`)
+      await axios.delete(`students/${studentId}`)
       alert('Estudiante eliminado correctamente')
       await fetchStudents()
     } catch (error) {

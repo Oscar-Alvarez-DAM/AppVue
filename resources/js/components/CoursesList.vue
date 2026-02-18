@@ -95,7 +95,7 @@ const editingCourse = ref(null)
 
 const fetchCourses = async () => {
   try {
-    const response = await axios.get('/api/courses')
+    const response = await axios.get('courses')
     courses.value = response.data
   } catch (error) {
     console.error('Error fetching courses:', error)
@@ -106,10 +106,10 @@ const fetchCourses = async () => {
 const saveCourse = async () => {
   try {
     if (editingCourse.value) {
-      await axios.put(`/api/courses/${editingCourse.value.id}`, form.value)
+      await axios.put(`courses/${editingCourse.value.id}`, form.value)
       alert('Curso actualizado correctamente')
     } else {
-      await axios.post('/api/courses', form.value)
+      await axios.post('courses', form.value)
       alert('Curso creado correctamente')
     }
     resetForm()
@@ -140,7 +140,7 @@ const resetForm = () => {
 const deleteCourse = async (courseId) => {
   if (confirm('¿Deseas eliminar este curso?')) {
     try {
-      await axios.delete(`/api/courses/${courseId}`)
+      await axios.delete(`courses/${courseId}`)
       alert('Curso eliminado correctamente')
       await fetchCourses()
     } catch (error) {
